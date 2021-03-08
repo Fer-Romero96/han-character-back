@@ -19,7 +19,8 @@ Para verificar que está bien instalado Docker Desktop, en la terminal de Ubuntu
 # Recordatorio windows
 Debe estar corriendo Docker Desktop en Windows para que se pueda acceder a los contenedores desde la terminal de Ubuntu.
 En la esquina inferior izquierda de Visual Studio Code en el recuadro verde debe decir `WSL: Ubuntu-20.04`
-Siempre usar la terminal como root porque causa muchos problemas de privilegios al utilizar los comandos.
+Siempre usar la terminal como root porque causa muchos problemas de privilegios al utilizar los comandos. Comando `sudo -i`.
+Folder de la cuenta normal se encuentra en `/home/cuenta_creada`
 
 # Instalación Linux y Mac
 1. Clonar repositorio y moverse a la carpeta hanchar.
