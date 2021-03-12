@@ -1,4 +1,4 @@
-# Preparando instalación en Windows 10
+# Preparando instalación en Windows 10 para utilizar Dockers y Sail
 1. Instalar [Docker Desktop](https://www.docker.com/products/docker-desktop)
 2. Instalar Windows Subsystem for Linux, utilza este [tutorial](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
 3. Descarga la aplicación de [Ubuntu 20.04 LTS](https://www.microsoft.com/en-us/p/ubuntu-2004-lts/9n6svws3rx71?rtc=1&activetab=pivot:overviewtab)
@@ -22,7 +22,19 @@ En la esquina inferior izquierda de Visual Studio Code en el recuadro verde debe
 Siempre usar la terminal como root porque causa muchos problemas de privilegios al utilizar los comandos. Comando `sudo -i`.
 Folder de la cuenta normal se encuentra en `/home/cuenta_creada`
 
-# Instalación Linux y Mac
-1. Clonar repositorio y moverse a la carpeta hanchar.
-2. Agregar alias `alias sail='bash vendor/bin/sail'`. Los siguientes comandos usan ese alias para acortar.
-3. Correr los dockers con `sail up`
+# Instalación Linux y Mac para utilizar Dockers y Sail
+1. Clonar repositorio
+2. Ejecutar el archivo `instal` en otra carpeta, eso crea un nuevo proyecto de laravel llamado hanchar
+3. De la carpeta hanchar creada con `install` copia el archivo `.env` y la carpeta `vendor` a la carpeta hanchar del repositorio clonado.
+4. Agregar alias `alias sail='bash vendor/bin/sail'`. Los siguientes comandos usan ese alias para acortar.
+5. Cambiar permisos con `chmod -R 775` a los siguientes archivos y carpetas:
+    - .env
+    - database
+    - storage
+6. Correr los dockers con `sail up` y en visual estudio abre una terminal nueva para no detenerlos.
+7. Cambiar a carpeta hanchar y activar de nuevo el alias.
+8. Ejecutar `sail composer install`
+9. Ejecutar `sail php artisan key:generate`
+10. Ejecutar `sail php artisan migrate`
+
+Ahora se puede ver el proyecto en el navegador con la ruta `localhost`
