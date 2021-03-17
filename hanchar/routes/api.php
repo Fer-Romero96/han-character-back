@@ -20,7 +20,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::middleware(['auth:sanctum'])
-    ->get('/character/{char}', 'App\Http\Controllers\Api\CharactersController@search')
+    ->get('/character/{char}', 'App\Http\Controllers\Api\CharactersController@info')
+    ->name('api.characters.info');
+
+Route::middleware(['auth:sanctum'])
+    ->post('/character', 'App\Http\Controllers\Api\CharactersController@search')
     ->name('api.characters.search');
 
 Route::post('/tokens/create', 'App\Http\Controllers\Api\AuthController@create')
