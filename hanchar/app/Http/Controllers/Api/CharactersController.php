@@ -19,7 +19,14 @@ class CharactersController extends Controller
 	        'x-rapidapi-host' => 'kanjialive-api.p.rapidapi.com'
         ])->get($url)->json();
 
+        $data['kanji']['character'] = $response['kanji']['character'];
+        $data['kanji']['strokes'] = $response['kanji']['strokes'];
+        unset($data['kanji']['strokes']['timings']);
+        $data['kanji']['onyomi'] = $response['kanji']['onyomi'];
+        $data['kanji']['kunyomi'] = $response['kanji']['kunyomi'];
+        $data['radical'] = $response['radical'];
+        $data['examples'] = $response['examples'];
 
-        return response()->json($response);
+        return response()->json($data);
     }
 }
