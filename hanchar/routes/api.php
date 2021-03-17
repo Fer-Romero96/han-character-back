@@ -17,3 +17,5 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/character/{char}', 'App\Http\Controllers\Api\CharactersController@search')->name('api.characters.search');
