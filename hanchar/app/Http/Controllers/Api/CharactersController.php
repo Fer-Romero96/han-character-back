@@ -23,6 +23,7 @@ class CharactersController extends Controller
         if (array_key_exists('kanji', $response)) {
 
             $data['kanji']['character'] = $response['kanji']['character'];
+            $data['kanji']['meaning']['english'] = $response['kanji']['meaning']['english'];
             $data['kanji']['strokes'] = $response['kanji']['strokes'];
             unset($data['kanji']['strokes']['timings']);
             $data['kanji']['onyomi'] = $response['kanji']['onyomi'];
