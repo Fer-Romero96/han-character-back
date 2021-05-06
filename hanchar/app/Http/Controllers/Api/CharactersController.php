@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Models\Kanji;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
 
 class CharactersController extends Controller
@@ -20,9 +21,16 @@ class CharactersController extends Controller
 	        'x-rapidapi-host' => 'kanjialive-api.p.rapidapi.com'
             ])->get($url)->json();
 
+        if (Kanji::where('char', $char)->exists())
+        {
+            $info = Kanji::where('char', $char)->get('info');
+            return response()->json(json_decode($info[0]['info']));
+        }
+
         if (array_key_exists('kanji', $response)) {
 
             $data['kanji']['character'] = $response['kanji']['character'];
+            $data['kanji']['meaning']['english'] = $response['kanji']['meaning']['english'];
             $data['kanji']['strokes'] = $response['kanji']['strokes'];
             unset($data['kanji']['strokes']['timings']);
             $data['kanji']['onyomi'] = $response['kanji']['onyomi'];
@@ -57,6 +65,11 @@ class CharactersController extends Controller
 
                 $data['kanji']['kunyomi']['mp3_base64'] = base64_encode($mp3_kunyomi);
             }
+
+            $kanji = new Kanji();
+            $kanji->char = $char;
+            $kanji->info = json_encode($data);
+            $kanji->save();
 
             return response()->json($data);
         } else {
