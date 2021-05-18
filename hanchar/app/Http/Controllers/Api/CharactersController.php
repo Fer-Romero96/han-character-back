@@ -78,16 +78,16 @@ class CharactersController extends Controller
     }
 
     public function search(Request $request) {
-        $data['character'] = [
-            'option_1' => '胃',
-            'option_2' => '冑',
-            'option_3' => '写',
-            'option_4' => '昌',
-            'option_5' => '骨',
-            'option_6' => '冒',
-            'option_7' => '男',
-            'option_8' => '胄',
-        ];
+        $url_ml = env('BASE_URL_ML_API');
+        $url_ml .= '/predict';
+
+        $image = $request['image-base64'];
+
+        $ml_prediction = Http::post($url_ml, [
+            'image-base64' => $image,
+        ]);
+        // dd($ml_prediction);
+        $data = json_decode($ml_prediction);
 
         return response()->json($data);
     }
